@@ -2,8 +2,8 @@ module.exports = function (sequelize, DataTypes) {
     const user = sequelize.define(
         'user', //create table name
         {
-        user_id: { 
-            field: 'user_id', 
+        userId: { 
+            field: 'userId', 
             type: DataTypes.STRING(50), 
             unique: true, 
             allowNull: false 
@@ -18,11 +18,16 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.TEXT,
             allowNull: true,
         },
-        created_at: {
-            field: 'created_at', 
+        createdDate: {
+            field: 'createdDate', 
             type: DataTypes.DATE,
             allowNull: false,
             defaultValue: sequelize.literal('now()'),
+        },
+        isDeleted: {
+            field: 'isDeleted', 
+            type: DataTypes.INTEGER,
+            allowNull: false,
         },
     }, {
       timestamps : false,
@@ -34,6 +39,10 @@ module.exports = function (sequelize, DataTypes) {
       // define the table's name
       //tableName: 'user'
     });
+
+    user.associate = function(models) {
+        user.hasMany(models.customer);
+    };
   
     return user;
   };
