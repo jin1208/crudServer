@@ -4,7 +4,9 @@
   "description": "express server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "node app.js",
+    "client": "cd ..&& cd client && yarn start",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "author": "",
   "license": "ISC",
@@ -13,5 +15,8 @@
     "express": "^4.17.1",
     "mysql2": "^2.1.0",
     "sequelize": "^5.21.4"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0"
   }
 }
