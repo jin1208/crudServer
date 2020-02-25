@@ -6,6 +6,7 @@ const port = process.env.PORT || 5000;
 
 //routes
 const routes = require('./routes/'); // index.js는 /와 같으므로 생략가능
+const routesUpload = require('./routes/upload.js');
 
 //connectDB
 const models = require('./models'); // mysql model
@@ -25,6 +26,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.use(routes); // use는 경로에 대한 확장성의 의미
+app.use(routesUpload);
+
+//정적인 파일이 접근할 라우터 path 설정
+app.use('/image', express.static('./upload'));
 
 
 http.listen(port, () => {
