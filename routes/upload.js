@@ -17,17 +17,16 @@ let upload = multer({
     storage: storage
 })
 
-router.post('/add', upload.single("image"), function(req, res) {
-    console.log(req.file);
-    // res.json(req.file);
-
+router.post('/list', upload.single("image"), function(req, res) {
     // 삽입
+    console.log(req.file);
     models.customer.create({
-        image : '/image/' + req.file.originalname,
+        image : '/image/' + req.file.filename,
         name : req.body.name,
         birthday : req.body.birthday,
         gender : req.body.gender,
-        job : req.body.job
+        job : req.body.job,
+        isDeleted : 0
     }).then(data => {
         console.log('data Insert :' + data);
     }).catch(err => {

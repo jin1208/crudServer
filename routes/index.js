@@ -2,11 +2,13 @@
 const router = require('express').Router();
 const controller = require('./controller');
 
-router.get('/', controller.testConnDB);
+router.get('/list', controller.customerList);
 
-router.get('/main', controller.mainView);
+router.delete('/list/:id', controller.delete);
 
-router.get('/customer', controller.selectCustomer);
+router.put('/list/:id', controller.update);
+
+router.get('/list/:search', controller.searchList);
 
 
 module.exports = router;
